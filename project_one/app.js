@@ -18,49 +18,27 @@ $(() => {
 
             const call = 'https://api.edamam.com/search?q='+recipeQuery+'&app_id=ded1159b&app_key=6f0083a34105d7037ac077947594f3ed'; //concatenate the recipeQuery inside of the API
 
-            $.ajax({url: call, success: function(result){
+            $.ajax({url: cabll, success: function(result){
                 console.log(result);
                 //array of the recipes relating to the search term
-                const recipes = result.hits;   
+                const hits = result.hits;   
                 //reinitialize array to empty         
                 recipeObjs = [];
                 //iterate the recipe array and create recipe cards and add them to recipe div
-                for(let i = 0; i < recipes.length; i++) {
+                for(let i = 0; i < hits.length; i++) {
                     //recipe obtained from object in recipes array
-
+                    const hit = hits[i];
+                    const recipe = hit.recipe;
                     //push recipe into recipeObjs array
-
-                    //each recipe card needs a class of recipe-card
-
+                    recipeObjs.push(recipe);
+                    //each recipe card needs a class of recipe-card. addClass 
+                    const $recipeCard = $('<div>').addClass('recipe-card').text(recipe.label)
+                    //add recipe-card to recipe div
+                    $('#recipes').append($recipeCard);
                 }
 
             }});
 
-            const recipeName ="";
-            const $div = $("<div>").addClass('recipe-item').text(text);
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            const $doButton = $("<button>").addClass('completeBtn').addClass('blurb-button').text('Complete');
-            $div.append($doButton);
-            $('#to-do-list').append($div);
         });
 
         //a click for every recipe item that will create the list of ingredient items from that recipe
