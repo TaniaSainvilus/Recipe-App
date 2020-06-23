@@ -2,7 +2,7 @@ html, body {
     margin: 0;
     height: 100%;
 }
-
+/* css grid */
 body {
     display: grid;
     grid-template-columns: 2.5% 95% 2.5%;
@@ -11,12 +11,14 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+/* centers the item*/
 div.container {
     text-align: center;
     grid-column: 2 / span 1;
     grid-row: 2 / span 1;
 }
 
+/* recipe room and search bar*/
 div#main-bar {
     grid-column: 1 / span 3;
     grid-row: 1 / span 1;
@@ -51,7 +53,7 @@ div#search-bar {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 30px;
-    grid-auto-rows: 350px;
+    grid-auto-rows: 300px;
     position: relative;
 }
 
@@ -64,7 +66,7 @@ div.recipe-card {
     border-radius: 3px;
 }
 
-/* selects and styles all checkboxes */
+/* selects and styles all checkboxes. grid-column places it in csorner. grid-row places it in first row */
 input[type='checkbox']{
     grid-column: 3 / span 1;
     grid-row: 1 / span 1;
@@ -89,6 +91,7 @@ input[type='checkbox']:checked {
     background-color: rgb(202, 92, 28);
 }
 
+/*corner checkbox*/
 .recipe-select {
     grid-column: 3 / span 1;
     grid-row: 1 / span 1;
@@ -196,10 +199,6 @@ i {
     margin-top: 50px; /* space between recipe-card and ingredients*/
 }
 
-div.ingredient-card {
-
-}
-
 #recipes-btn, #ingredients-btn {
     position:absolute;
     top:0;
@@ -209,8 +208,8 @@ div.ingredient-card {
     border: solid 1px rgb(202, 92, 28);
 }
 
-
-@media only screen and (max-width: 500px) {
+/*styling for ipad*/
+@media only screen and (max-width: 1060px) {
 
     #recipes {
         grid-template-columns: repeat(3, 1fr);
@@ -220,6 +219,7 @@ div.ingredient-card {
 
 }
 
+/*styling for phones*/
 @media only screen and (max-width: 500px) {
     body {
         display: grid;
