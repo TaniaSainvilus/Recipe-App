@@ -8,6 +8,7 @@ body {
     grid-template-columns: 2.5% 95% 2.5%;
     grid-template-rows: 1fr 3fr;
     background-color: rgb(255, 255, 255);
+    font-family: 'Open Sans', sans-serif;
 }
 
 div.container {
@@ -48,45 +49,54 @@ div#search-bar {
 
 #recipes {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
-    grid-auto-rows: 210px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 30px;
+    grid-auto-rows: 350px;
     position: relative;
 }
 
 div.recipe-card {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: .5fr 1fr 4fr 1fr;
     align-items: end;
     background-color: rgba(202, 92, 28, 0.3);
     border-radius: 3px;
 }
 
+/* selects and styles all checkboxes */
 input[type='checkbox']{
-    grid-column: 4 / span 1;
+    grid-column: 3 / span 1;
     grid-row: 1 / span 1;
     place-self: end;
     width: 15px;
     height: 15px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -o-appearance: none;
-    appearance: none;
+    /* removes default styling */
+    -webkit-appearance: none; /* chrome and safari  */
+    -moz-appearance: none;    /* mozilla */
+    -o-appearance: none;      /*  */
+    appearance: none;         /* platform specific styling */
     border: 2px solid rgb(202, 92, 28);
     border-radius: 25px;
     outline: none;
     transition-duration: 0.3s;
-    background-color: rgba(202, 92, 28, 0.3);;
+    background-color: rgba(202, 92, 28, 0.3);
 }
 
+/* selects and styles all checked checkboxes */
 input[type='checkbox']:checked {
     border: 2px solid rgb(202, 92, 28);
     background-color: rgb(202, 92, 28);
 }
 
+.recipe-select {
+    grid-column: 3 / span 1;
+    grid-row: 1 / span 1;
+    place-self: end;
+}
+
 .recipe-header {
-    grid-column: 1 / span 4;
+    grid-column: 1 / span 3;
     grid-row: 2 / span 1;
     place-self: center;
     color: rgb(202, 92, 28);
@@ -96,7 +106,7 @@ input[type='checkbox']:checked {
     max-width: 60%; 
     max-height: 60%; 
     place-self: center;
-    grid-column: 1 / span 4;
+    grid-column: 1 / span 3;
     grid-row: 3 / span 1;
 }
 
@@ -117,24 +127,76 @@ input[type='checkbox']:checked {
     grid-row: 4 / span 1;
     place-self: center;
 }
-
+/*
 .nutrient {
     grid-column: 4 / span 1;
     grid-row: 4 / span 1;
     place-self: center;
 }
-
+*/
 i {
     color: rgb(202, 92, 28);
     text-shadow: 1px 1px 1px #ccc;
     font-size: 1.5em;
 }
 
-#ingredients {
+/* Tooltip container */
+.ttip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Tooltip text */
+  .ttip .ttiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgb(202, 92, 28);
+    color: white;
+    text-align: justify;
+    padding: 5px 0 5px 5px;
+    border-radius: 6px;
+    font-family: 'Open Sans', sans-serif;
+    text-shadow: none;
+    font-size: 10px;
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+  
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
 
+  .ttip .ttiptext.nutri {
+    width: 160px;
+  }
+  
+  /* Tooltip arrow */
+  .ttip .ttiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgb(202, 92, 28) transparent transparent transparent;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .ttip:hover .ttiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+#ingredients {
+    margin-top: 50px; /* space between recipe-card and ingredients*/
 }
 
-div.ingredients-card {
+div.ingredient-card {
 
 }
 
@@ -147,6 +209,16 @@ div.ingredients-card {
     border: solid 1px rgb(202, 92, 28);
 }
 
+
+@media only screen and (max-width: 500px) {
+
+    #recipes {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+        grid-auto-rows: 310px;
+    }
+
+}
 
 @media only screen and (max-width: 500px) {
     body {
@@ -167,20 +239,20 @@ div.ingredients-card {
 
     div.recipe-card {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: .5fr 1fr 4fr 1fr;
         align-items: end;
         border-radius: 3px;
     }
 
     .recipe-select {
-        grid-column: 4 / span 1;
+        grid-column: 3 / span 1;
         grid-row: 1 / span 1;
         place-self: end;
     }
     
     .recipe-header {
-        grid-column: 1 / span 4;
+        grid-column: 1 / span 3;
         grid-row: 2 / span 1;
         place-self: center;
     }
@@ -189,7 +261,7 @@ div.ingredients-card {
         max-width: 60%; 
         max-height: 60%; 
         place-self: center;
-        grid-column: 1 / span 4;
+        grid-column: 1 / span 3;
         grid-row: 3 / span 1;
     }
     
@@ -210,21 +282,21 @@ div.ingredients-card {
         grid-row: 4 / span 1;
         place-self: center;
     }
-    
+    /*
     .nutrient {
         grid-column: 4 / span 1;
         grid-row: 4 / span 1;
         place-self: center;
     }
-
+*/
     #ingredients {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         grid-gap: 15px;
-        grid-auto-rows: 100px;
+        grid-auto-rows: 40px;
     }
     
-    div.ingredients-card {
-        place-self: center;
+    div.ingredient-card {
+        place-self: stretch;
     }
   }
