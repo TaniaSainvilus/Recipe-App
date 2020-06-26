@@ -9,7 +9,7 @@ let areRecipes = false;
 let areIngredients = false;
 $(() => {
 
-    //handles the search button to call the API with the users query text and then it'll build and return different recipes
+//handles the search button to call the API with the users query text and then it'll build and return different recipes
     $('#submit').click(function(){
         //grab the text from the search box
         const text = $('#input-box').val();
