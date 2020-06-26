@@ -10,7 +10,6 @@ let areIngredients = false;
 $(() => {
 
     //handles the search button to call the API with the users query text and then it'll build and return different recipes
-
     $('#submit').click(function(){
         //grab the text from the search box
         const text = $('#input-box').val();
@@ -18,7 +17,7 @@ $(() => {
         const recipeQuery = text.replace(/ /g, '%20');//replacing all spaces with a regex (defines the search pattern) and %20 so URL won't read it as a an invalid character
 
         const call = 'https://api.edamam.com/search?q='+recipeQuery+'&app_id=ded1159b&app_key=6f0083a34105d7037ac077947594f3ed'; //concatenate the recipeQuery inside of the API
-        //if there was a previous call that filled recipes div (keeps from replicating the recipes after clicking search)
+//if there was a previous call that filled recipes div (keeps from replicating the recipes after clicking search)
         if(areRecipes){
             $('#recipes').empty(); //clear out the old recipes
         }
@@ -28,7 +27,7 @@ $(() => {
             const hits = result.hits;   
             //reinitialize array to empty         
             recipeObjs = [];
-            //iterate the recipe array and create recipe cards and add them to recipe div
+     //iterate the recipe array and create recipe cards and add them to recipe div
             for(let i = 0; i < hits.length; i++) {
                 //recipe obtained from object in recipes array
                 const hit = hits[i];
@@ -37,7 +36,7 @@ $(() => {
                 recipeObjs.push(recipe);
                 //each recipe card needs a class of recipe-card. addClass 
                 const $recipeCard = $('<div>').addClass('recipe-card').attr('recipe-num', i)
-                //link and header of anchor tag (link) with recipe header class (target=_blank to open new tab)
+        //link and header of anchor tag (link) with recipe header class (target=_blank to open new tab)
                 const $titleLink = $('<a>').attr('href', recipe.url).attr('target', '_blank').addClass('recipe-header').text(recipe.label);
                 //adding anchor to the recipe-card
                 $recipeCard.append($titleLink);
@@ -45,13 +44,13 @@ $(() => {
                 const $input = $('<input>').attr('type', 'checkbox').attr("name","select-item").addClass('recipe-select');
                 //adding input to recipe-card (places circle on recipe-card)
                 $recipeCard.append($input);
-                //image for the recipe card
+         //image for the recipe card
                 const $image = $('<img>').attr('src', recipe.image).attr('alt', recipe.label + ' image').addClass('recipe-image')
                 //places image on recipe-card
                 $recipeCard.append($image);
                 //fork and knife icon - hover over to show diet list
                 const $diet = $('<i>').addClass('ttip diet fa fa-cutlery').attr('type', 'dietLabels');
-                //get text. builds HTML strig to go into tooltip
+         //get text. builds HTML string to go into tooltip
                 const strDiet = addStrToTip(recipe.dietLabels,"Diets")
                 //diet tooltip
                 const $dietTip = $('<span>').addClass('ttiptext diet').css("font-family", "'Open Sans', sans-serif;").html(strDiet)
@@ -97,7 +96,7 @@ $(() => {
 
     });
 
-    //clicking circular checkbox will hide list of recipes you didn't click on and adds ingredients to the one clicked
+//clicking circular checkbox will hide list of recipes you didn't click on and adds ingredients to the one clicked
 
     //check or uncheck of checkbox
     $('#recipes').on("change", ".recipe-card :checkbox", function () {
@@ -109,7 +108,7 @@ $(() => {
             if(areIngredients){
                 $('#ingredients').empty()
             }
-            //setting a variable to recipeCard that was clicked. go from checkbox to parent(div)
+     //setting a variable to recipeCard that was clicked. go from checkbox to parent(div)
             const $recipeCard = $(this).parent();
             // grab the index of the element that is in the recipe object array
             const index = parseInt($recipeCard.attr('recipe-num'));
@@ -136,7 +135,7 @@ $(() => {
             }    
             areIngredients = true;
         }    
-        //recipe card has just been unchecked
+    //recipe card has just been unchecked
         else {
             //show all of the hidden divs that were not selected
             $(this).parent().siblings('.recipe-card').show()
